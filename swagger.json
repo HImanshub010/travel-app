@@ -1,0 +1,479 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "description": "booking api",
+    "title": "Travel-app"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/users/signup": {
+      "post": {
+        "tags":[
+          "users"
+        ],
+        "description": "Creates a user in the database",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "Username of user",
+            "name": "name",
+            "in": "formData",
+            "example": "Himanshu"
+          },
+          {
+            "type": "string",
+            "description": "email of user",
+            "name": "email",
+            "in": "formData",
+            "example": "hb@gmail.com"
+          },
+          {
+            "type": "string",
+            "description": "User password",
+            "name": "password",
+            "in": "formData",
+            "example": "*******"
+          },
+          {
+            "type": "Float",
+            "description": "User current latitude",
+            "name": "lat",
+            "in": "formData",
+            "example": "123.45"
+          },
+          {
+            "type": "Float",
+            "description": "User current longitude",
+            "name": "long",
+            "in": "formData",
+            "example": "13.45"
+          },
+          {
+            "type": "Date",
+            "description": "User date of birth in YYYY-MM-DD",
+            "name": "dob",
+            "in": "formData",
+            "example": "1997-04-03"
+          },
+          {
+            "type": "Number",
+            "description": "User phone Number",
+            "name": "phoneNumber",
+            "in": "formData",
+            "example": "9759837987"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully signed up."
+          },
+          "400": {
+            "description": "error in signup"
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags":[
+          "users"
+        ],
+        "description": "Logs in a user",
+        "parameters": [
+          {
+            "type": "Number",
+            "description": "ID of user",
+            "name": "id",
+            "in": "formData"
+          },
+          {
+            "type": "password",
+            "description": "Password",
+            "name": "password",
+            "in": "formData"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully logged in."
+          },
+          "400": {
+            "description": "error in logging."
+          }
+        }
+      }
+    },
+    "/users/createBooking": {
+      "post": {
+        "tags":[
+          "users"
+        ],
+        "description": "creates a bookng for user",
+        "parameters": [
+          {
+            "type": "Token",
+            "description": "Token for authentication",
+            "name": "token",
+            "in": "header"
+          },
+          {
+            "type": "float",
+            "description": "pickup latitude for customer",
+            "name": "pickupLat",
+            "in": "formData"
+          },
+          {
+            "type": "float",
+            "description": "pickup longitude for customer",
+            "name": "pickupLong",
+            "in": "formData"
+          },
+          {
+            "type": "float",
+            "description": "drop latitude for customer",
+            "name": "dropLat",
+            "in": "formData"
+          },
+          {
+            "type": "float",
+            "description": "drop longitude for customer",
+            "name": "dropLong",
+            "in": "formData"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully created a booking."
+          },
+          "400": {
+            "description": "error in creating booking."
+          }
+        }
+      }
+    },
+    "/admin/login": {
+      "post": {
+        "tags":[
+          "admin"
+        ],
+        "description": "Logs in a Admin",
+        "parameters": [
+          {
+            "type": "Number",
+            "description": "ID of admin",
+            "name": "id",
+            "in": "formData"
+          },
+          {
+            "type": "password",
+            "description": "Password",
+            "name": "password",
+            "in": "formData"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully logged in."
+          },
+          "400": {
+            "description": "error in logging."
+          }
+        }
+      }
+    },
+    "/admin/getAllUnassignedBooking": {
+      "get": {
+        "tags":[
+          "admin"
+        ],
+        "description": "Fetche the details for all pending booking",
+        "parameters": [
+          {
+            "type": "Token",
+            "description": "Token for authentication",
+            "name": "token",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully fetched Details."
+          },
+          "400": {
+            "description": "error in fetching Details."
+          }
+        }
+      }
+    },
+    "/admin/getAvailableDriver": {
+      "get": {
+        "tags":[
+          "admin"
+        ],
+        "description": "get the driver Id and name of all available driver",
+        "parameters": [
+          {
+            "type": "Token",
+            "description": "Token for authentication",
+            "name": "token",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully fetched Details."
+          },
+          "400": {
+            "description": "error in fetching Details."
+          }
+        }
+      }
+    },
+    "/admin/assignBooking": {
+      "post": {
+        "tags":[
+          "admin"
+        ],
+        "description": "assign a driver to a Pending Booking ",
+        "parameters": [
+          {
+            "type": "Token",
+            "description": "Token for authentication",
+            "name": "token",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully assigned Booking"
+          },
+          "400": {
+            "description": "error in assiging Booking"
+          }
+        }
+      }
+    },
+    "/admin/getAllOngoingBooking": {
+      "get": {
+        "tags":[
+          "admin"
+        ],
+        "description": "List all ongoing Rides with booking Id Driver Id and Name of Driver",
+        "parameters": [
+          {
+            "type": "Token",
+            "description": "Token for authentication",
+            "name": "token",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully fetched Details."
+          },
+          "400": {
+            "description": "error in fetching Details."
+          }
+        }
+      }
+    },
+    "/admin/bookingHistory": {
+      "get": {
+        "tags":[
+          "admin"
+        ],
+        "description": "List all the previous booking assigned by admin",
+        "parameters": [
+          {
+            "type": "Token",
+            "description": "Token for authentication",
+            "name": "token",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully fetched Details."
+          },
+          "400": {
+            "description": "error in fetching Details."
+          }
+        }
+      }
+    },
+    "/driver/signup": {
+      "post": {
+        "tags":[
+          "driver"
+        ],
+        "description": "Creates a user in the database",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "Name of driver",
+            "name": "name",
+            "in": "formData",
+            "example": "KALU"
+          },
+          {
+            "type": "string",
+            "description": "licence Number of user",
+            "name": "licenceNumber",
+            "in": "formData",
+            "example": "UKAa34522345"
+          },
+          {
+            "type": "string",
+            "description": "Driver password",
+            "name": "password",
+            "in": "formData",
+            "example": "*******"
+          },
+          {
+            "type": "Float",
+            "description": "Driver current latitude",
+            "name": "lat",
+            "in": "formData",
+            "example": "123.45"
+          },
+          {
+            "type": "Float",
+            "description": "Driver current longitude",
+            "name": "long",
+            "in": "formData",
+            "example": "13.45"
+          },
+          {
+            "type": "Date",
+            "description": "Driver date of birth in YYYY-MM-DD",
+            "name": "dob",
+            "in": "formData",
+            "example": "1997-04-03"
+          },
+          {
+            "type": "Number",
+            "description": "Driver phone Number",
+            "name": "phoneNumber",
+            "in": "formData",
+            "example": "9759837987"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully signed up."
+          },
+          "400": {
+            "description": "error in signup"
+          }
+        }
+      }
+    },
+    "/driver/login": {
+      "post": {
+        "tags":[
+          "driver"
+        ],
+        "description": "Logs in a Driver",
+        "parameters": [
+          {
+            "type": "Number",
+            "description": "ID of Driver",
+            "name": "id",
+            "in": "formData"
+          },
+          {
+            "type": "password",
+            "description": "Password",
+            "name": "password",
+            "in": "formData"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully logged in."
+          },
+          "400": {
+            "description": "error in logging."
+          }
+        }
+      }
+    },
+    "/driver/completeBooking": {
+      "post": {
+        "tags":[
+          "driver"
+        ],
+        "description": "Mark the status of current logged in driver as available",
+        "parameters": [
+          {
+            "type": "Token",
+            "description": "Token for authentication",
+            "name": "token",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully compleated Ride"
+          },
+          "400": {
+            "description": "error in Processing Request"
+          }
+        }
+      }
+    },
+    "/driver/ongoingBooking": {
+      "get": {
+        "tags":[
+          "driver"
+        ],
+        "description": "List all the on booking assigned by Driver logged in",
+        "parameters": [
+          {
+            "type": "Token",
+            "description": "Token for authentication",
+            "name": "token",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully fetched Details."
+          },
+          "400": {
+            "description": "error in fetching Details."
+          }
+        }
+      }
+    },
+    "/driver/bookingHistory": {
+      "get": {
+        "tags":[
+          "driver"
+        ],
+        "description": "List all the previous booking assigned by logged in driver",
+        "parameters": [
+          {
+            "type": "Token",
+            "description": "Token for authentication",
+            "name": "token",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully fetched Details."
+          },
+          "400": {
+            "description": "error in fetching Details."
+          }
+        }
+      }
+    }
+  }
+}
