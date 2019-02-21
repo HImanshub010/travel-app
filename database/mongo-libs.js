@@ -1,11 +1,11 @@
 const mongo = require('mongodb')
+const constants = require('./../constants/constants')
 const MongoClient = mongo.MongoClient;
-const url = 'mongodb://localhost:27017';
-const dbName = 'myDb';
-MongoClient.connect(url, function (err, client) {
+
+MongoClient.connect(constants.mongoConstants.URL, function (err, client) {
   if(err) throw err;
   console.log("Connected successfully to Mongo server");
-  db = client.db(dbName);
+  db = client.db(constants.mongoConstants.DB_NAME);
 });
 
 const insertDataInMongo = (collectionName,data)=>{
