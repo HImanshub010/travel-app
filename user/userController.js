@@ -61,7 +61,6 @@ const login = Promise.coroutine(function* (req, res){
       })
     }
   } catch (err) {
-    console.log('>>>>>>>>>  '+err);
     res.send({
       message: constants.responseMessages.ERROR_OCCURED,
       status: constants.responsestatus.ERROR_OCCURED,

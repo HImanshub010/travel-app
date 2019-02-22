@@ -3,12 +3,36 @@ const mongo = require('./../database/mongo-libs');
 const mysql = require('../database/mysql-libs')
 
 /**
+   * @function <b> intializeAdmin </b> <br>
+   * Service function for intializing the two admin if there are no admin.
+   * @param 
+   * @return {Object} result Promise object from sql upon successful completion
+   */
+
+const intializeAdmin = Promise.coroutine(function*(){
+  let query = 'select * from admin';
+  try {
+    let result = yield mysql.mysqlQuery(query , []);
+    console.log(result);
+    if(!result||!result[0]){
+      let insertQuery= "INSERT INTO admin (admin_id, name, email,password) VALUES ('1', 'admin1', 'admin1@gmail.com','$2b$10$A00Re/T30fQQkLzfgZXyLOqls/ur363GD79vaYyVTetbt.SDp5/VW'),('2','admin2', 'admin2@gmail.com','$2b$10$Pz3zR0W/wZrHwVpQizgUqOwcM81FiCR0lRN0QwJQ0aZU2PyLuj7SC')";
+      yield mysql.mysqlQuery(insertQuery , [])//,'admin2','admin2@gmail.com','admin2']);
+      return Promise.resolve('Successfully inserted two admin');
+    }else{
+      return Promise.resolve('Welcome to the Travel - app');
+    }
+  } catch (error) {
+    throw error;
+  }
+})
+
+
+/**
    * @function <b> login </b> <br>
    * Service function for logging in a existing Admin
    * @param   name id 
    * @return {Object} result object from sql contains password (if successfull)
    */
-
 const login = Promise.coroutine(function* (id) {
   let query = `select password from admin where admin_id = ?`;
   try {
@@ -82,7 +106,7 @@ const assignBooking = Promise.coroutine(function* (adminId) {
       booking_id :pendingBooking[0].booking_id,
       date : new Date()
     });
-    return result1;
+    return Promise.resolve('Sucessfully assigned a booking');
   } catch (error) {
     throw error
   }
@@ -122,6 +146,7 @@ const bookingHistory = async (adminId) => {
 
 module.exports = {
   login,
+  intializeAdmin,
   assignBooking,
   bookingHistory,
   getAvailableDriver,
