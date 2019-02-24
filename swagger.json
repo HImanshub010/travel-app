@@ -13,7 +13,7 @@
   "paths": {
     "/users/signup": {
       "post": {
-        "tags":[
+        "tags": [
           "users"
         ],
         "description": "Creates a user in the database",
@@ -80,7 +80,7 @@
     },
     "/users/login": {
       "post": {
-        "tags":[
+        "tags": [
           "users"
         ],
         "description": "Logs in a user",
@@ -110,7 +110,7 @@
     },
     "/users/createBooking": {
       "post": {
-        "tags":[
+        "tags": [
           "users"
         ],
         "description": "creates a bookng for user",
@@ -156,9 +156,33 @@
         }
       }
     },
+    "/users/bookingHistory": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "description": "creates a bookng for user",
+        "parameters": [
+          {
+            "type": "Token",
+            "description": "Token for authentication",
+            "name": "token",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully fetched all the previous booking."
+          },
+          "400": {
+            "description": "Some error occured."
+          }
+        }
+      }
+    },
     "/admin/login": {
       "post": {
-        "tags":[
+        "tags": [
           "admin"
         ],
         "description": "Logs in a Admin",
@@ -188,7 +212,7 @@
     },
     "/admin/getAllUnassignedBooking": {
       "get": {
-        "tags":[
+        "tags": [
           "admin"
         ],
         "description": "Fetche the details for all pending booking",
@@ -212,7 +236,7 @@
     },
     "/admin/getAvailableDriver": {
       "get": {
-        "tags":[
+        "tags": [
           "admin"
         ],
         "description": "get the driver Id and name of all available driver",
@@ -236,7 +260,7 @@
     },
     "/admin/assignBooking": {
       "post": {
-        "tags":[
+        "tags": [
           "admin"
         ],
         "description": "assign a driver to a Pending Booking ",
@@ -260,7 +284,7 @@
     },
     "/admin/getAllOngoingBooking": {
       "get": {
-        "tags":[
+        "tags": [
           "admin"
         ],
         "description": "List all ongoing Rides with booking Id Driver Id and Name of Driver",
@@ -284,7 +308,7 @@
     },
     "/admin/bookingHistory": {
       "get": {
-        "tags":[
+        "tags": [
           "admin"
         ],
         "description": "List all the previous booking assigned by admin",
@@ -308,7 +332,7 @@
     },
     "/driver/signup": {
       "post": {
-        "tags":[
+        "tags": [
           "driver"
         ],
         "description": "Creates a user in the database",
@@ -375,7 +399,7 @@
     },
     "/driver/login": {
       "post": {
-        "tags":[
+        "tags": [
           "driver"
         ],
         "description": "Logs in a Driver",
@@ -405,7 +429,7 @@
     },
     "/driver/completeBooking": {
       "post": {
-        "tags":[
+        "tags": [
           "driver"
         ],
         "description": "Mark the status of current logged in driver as available",
@@ -429,7 +453,7 @@
     },
     "/driver/ongoingBooking": {
       "get": {
-        "tags":[
+        "tags": [
           "driver"
         ],
         "description": "List all the on booking assigned by Driver logged in",
@@ -453,7 +477,7 @@
     },
     "/driver/bookingHistory": {
       "get": {
-        "tags":[
+        "tags": [
           "driver"
         ],
         "description": "List all the previous booking assigned by logged in driver",

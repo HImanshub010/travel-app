@@ -46,8 +46,8 @@ const completeBooking = async (driverId) => {
   let query = 'update bookings set status = ? where status = ? and driver_id = ?';
   let query1 = 'update driver set status_available = ? where driver_id = ?';
   try {
-    let result = await mysql.mysqlQuery(query, [2, 1, driverId]);
-    let result1 = await mysql.mysqlQuery(query1, [1, driverId]);
+    await mysql.mysqlQuery(query, [2, 1, driverId]);
+    await mysql.mysqlQuery(query1, [1, driverId]);
     mongo.insertDataInMongo("compleated", {
       driver_id: driverId,
       date: new Date()

@@ -96,8 +96,35 @@ const createBooking = Promise.coroutine(function*(req,res){
   }
 })
 
+const bookingHistory = Promise.coroutine(function*(req,res){
+  /**
+   * @function <b> booking History </b> <br>
+   * List all the booking made by user
+   * @param {Object}req
+   * @return {Object} response object
+   */
+  let{ id } = req.authorizedData;
+  try {
+    let result = yield services.bookingHistory(id);
+    res.send({
+      message: constants.responseMessages.SUCCESSFULLY_FETCHED,
+      status: constants.responsestatus.SUCCESSFULLY_FETCHED,
+      data: {
+        result
+      }
+    }) 
+  } catch (error) {
+   res.send({
+    message: constants.responseMessages.ERROR_OCCURED,
+    status: constants.responsestatus.ERROR_OCCURED,
+    data: null
+   }) 
+  }
+})
+
 module.exports = {
   signup,
   login,
-  createBooking
+  createBooking,
+  bookingHistory
 }

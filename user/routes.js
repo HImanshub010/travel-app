@@ -11,4 +11,5 @@ router.post('/login', userValidation.validateLogin,userController.login);
 
 router.post('/createBooking',authentication.checkTokenForUser,userController.createBooking);
 
+router.get('/bookingHistory',authentication.checkTokenForUser,userController.bookingHistory);
 module.exports = router;

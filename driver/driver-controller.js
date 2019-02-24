@@ -62,7 +62,6 @@ const login = Promise.coroutine(function* (req, res) {
       })
     }
   } catch (err) {
-    console.log('>>>>>>>>>>>>>>>  ' + err);
     res.send({
       message: constants.responseMessages.ERROR_OCCURED,
       status: constants.responsestatus.ERROR_OCCURED,
@@ -82,14 +81,12 @@ const completeBooking = Promise.coroutine(function* (req, res) {
   console.log(id);
   try {
     let result = yield services.completeBooking(id);
-    console.log(result);
     res.send({
       messsage: constants.responseMessages.SUCCESSFULLY_FETCHED,
       status: constants.responsestatus.SUCCESSFULLY_FETCHED,
       data: result
     })
   } catch (error) {
-    console.log(error);
     res.send({
       message: constants.responseMessages.ERROR_OCCURED,
       status: constants.responsestatus.ERROR_OCCURED,

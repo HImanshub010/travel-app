@@ -61,8 +61,22 @@ const createBooking = async(id,pickupLat,pickupLong,dropLat,dropLong)=>{
   }
 }
 
+const bookingHistory = async(userId)=>{
+let query = `SELECT user.name AS 'USER NAME' ,user.user_id,driver.driver_id,driver.name AS 'Driver Name' ,bookings.booking_id FROM user inner JOIN bookings ON user.user_id = bookings.user_id INNER JOIN driver on bookings.driver_id = driver.driver_id where bookings.status = 2 AND user.user_id= ?;`
+  try {
+    let result = await mysql.mysqlQuery(query, [userId])
+    if(!result){
+      throw new Error('No matching element found');
+    }else{
+      return result
+    }
+  } catch (err) {
+    throw err
+  }
+}
 module.exports = {
   signup,
   login,
-  createBooking
+  createBooking,
+  bookingHistory
 }
